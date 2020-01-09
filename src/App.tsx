@@ -3,6 +3,16 @@ import './App.css'
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY
 
+const btnStyle = {
+  height: '6rem',
+  width: '6rem',
+  backgroundColor: '#aa0000',
+  border: 'none',
+  borderRadius: '50%',
+  boxShadow: '0 0 20px 0 rgb(0, 0, 0, 0.5)',
+  color: 'white',
+}
+
 const App: React.FC = () => {
   const [answer, setAnswer] = useState<string>('')
 
@@ -26,6 +36,7 @@ const App: React.FC = () => {
         const [weather] = data.weather
         const ans: string = weather.main
         setAnswer(ans)
+        console.log(ans)
       })
       .catch(err => console.log(err))
   }
@@ -34,17 +45,22 @@ const App: React.FC = () => {
     const reply =
       answer === ''
         ? ``
-        : answer === 'rain'
-        ? `Grab y'jacket`
-        : `Norr, you're fine pet`
+        : answer === 'Rain'
+        ? `yes`
+        : `no`
     return <h2>{reply}</h2>
   }
 
   return (
     <div className='App'>
       <>
-        <h1>Is it raining?</h1>
-        <button onClick={() => handleClick()}>find out</button>
+        <h1>Is it raining out?</h1>
+        <button 
+          style={btnStyle}
+          onClick={() => handleClick()}
+        >
+          find out
+        </button>
         <Answer />
       </>
     </div>
